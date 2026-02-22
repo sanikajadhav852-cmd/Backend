@@ -16,7 +16,7 @@ app.get("/", (req, res) => {
 
 
 app.use(cors({
-  origin: "http://localhost:5173", // frontend
+  origin: "*",   // allow all for testing
   credentials: true
 }));
 // Mount your routes
