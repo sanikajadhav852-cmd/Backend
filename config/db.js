@@ -1,19 +1,20 @@
+require("dotenv").config();
 const mysql = require("mysql2");
 
 const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",      // ✅ EMPTY PASSWORD
-  database: "parksmart",
-  port: 3307          // ✅ XAMPP MySQL port
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  port: process.env.DB_PORT,
 });
 
 db.connect((err) => {
   if (err) {
-    console.error("❌ MySQL connection failed:", err);
-  } else {
-    console.log("✅ MySQL Connected on port 3307");
+    console.error("❌ MySQL connection failed:", err.message);
+    return; // DO NOT CRASH SERVER
   }
+  console.log("✅ MySQL Connected to Clever Cloud");
 });
 
 module.exports = db;

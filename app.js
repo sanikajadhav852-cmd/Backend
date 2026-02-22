@@ -4,7 +4,7 @@ const app = express();
 
 // ✅ CORS MUST BE FIRST
 app.use(cors({
-  origin: "http://localhost:5173", 
+  origin: ["http://localhost:5173", "https://your-frontend-url.com"], // allow your frontend(s)
   credentials: true
 }));
 
@@ -14,6 +14,12 @@ app.get("/", (req, res) => {
   res.send("Parking Fee API is running");
 });
 
+
+app.use(cors({
+  origin: "http://localhost:5173", // frontend
+  credentials: true
+}));
+// Mount your routes
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/admin", require("./routes/adminRoutes"));
 app.use("/api/staff", require("./routes/staffRoutes"));
